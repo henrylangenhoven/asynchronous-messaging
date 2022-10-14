@@ -1,16 +1,28 @@
 import * as functions from "firebase-functions";
 
-const express = require('express');
-const bodyParser = require('body-parser');
+import * as express from "express";
+
+import * as bodyParser from "body-parser";
+
+import * as admin from "firebase-admin";
 
 const app = express();
 const jsonParser = bodyParser.json();
+admin.initializeApp();
 
-app.post('/', jsonParser, (req, res) => {
+
+app.post("/", jsonParser, async (req, res) => {
   const body = req.body;
-  res.send('Hello World, from express! Request: ' + JSON.stringify(body.Timestamp));
+  res.send("Timestamp: " + JSON.stringify(body.Timestamp));
+
+
+  const writeResult = await admin.firestore().collection("messages")
+      .add({body: body});
+
+  // Send back a message that we've successfully written the message
+  res.json({result: `Message with ID: ${writeResult.id} added.`});
 });
 
 
 // Expose Express API as a single Cloud Function:
-exports.widgets = functions.https.onRequest(app);
+exports.postMessage = functions.https.onRequest(app);
