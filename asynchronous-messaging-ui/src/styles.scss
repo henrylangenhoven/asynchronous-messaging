@@ -1,16 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
-body{
+body {
   background: rgba(255, 255, 255, 0.5);
 }
 
-.list-group{
-  width: 600px !important;
-
-}
-
-.list-group-item{
-  margin-top:10px;
+.list-group-item {
+  margin-top: 10px;
   border-radius: none;
   background: rgba(183, 183, 183, 0.32);
   cursor: pointer;
@@ -18,13 +13,12 @@ body{
 }
 
 
-.list-group-item:hover{
+.list-group-item:hover {
   transform: scaleX(1.1);
 }
 
 
-
-.check{
+.check {
   opacity: 0;
   transition: all 0.6s ease-in-out;
 }
@@ -34,7 +28,7 @@ body{
 
 }
 
-.about span{
+.about span {
   font-size: 12px;
   margin-right: 10px;
 
@@ -44,6 +38,7 @@ input[type=checkbox] {
   position: relative;
   cursor: pointer;
 }
+
 input[type=checkbox]:before {
   content: "";
   display: block;
@@ -57,6 +52,7 @@ input[type=checkbox]:before {
   background-color: white;
 
 }
+
 input[type=checkbox]:checked:after {
   content: "";
   display: block;
@@ -72,4 +68,6 @@ input[type=checkbox]:checked:after {
   left: 6px;
 }
 
-input[type="checkbox"]:checked + .check { opacity: 1; }
+input[type="checkbox"]:checked + .check {
+  opacity: 1;
+}
