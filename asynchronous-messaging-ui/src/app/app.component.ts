@@ -51,5 +51,4 @@ export class AppComponent implements OnDestroy {
 export interface Message {
   id: string;
   body: any;
-
 }

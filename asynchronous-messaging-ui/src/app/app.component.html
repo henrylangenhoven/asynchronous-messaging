@@ -12,8 +12,9 @@
             <div class="d-flex flex-row">
               <img src="https://freesvg.org/img/Coffee-Cup-Silhouette.png" width="80"/>
               <div class="ml-2">
-                <h6 class="mb-0">{{message.body.Message}}</h6>
+                <h6 class="mb-0">{{message.body.Subject ? message.body.Subject : message.body.Message}}</h6>
                 <div class="about">
+                  <div *ngIf="!!(message.body.Subject)">{{message.body.Message}}</div>
                   <span>{{message.body.Timestamp}}</span>
                 </div>
               </div>
