@@ -24,7 +24,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-
+      - run: node secrets.js
+        env:
+          FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
       - name: npm install and npm run build
         run: |
           cd asynchronous-messaging-ui && npm i
