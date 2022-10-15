@@ -25,4 +25,4 @@ app.post("/", jsonParser, async (req, res) => {
 
 
 // Expose Express API as a single Cloud Function:
-exports.postMessage = functions.https.onRequest(app);
+exports.postMessage = functions.region("europe-west1").https.onRequest(app);

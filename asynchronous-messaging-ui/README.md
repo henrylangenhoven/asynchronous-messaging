@@ -25,3 +25,7 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+# Resources
+Bootstrap list used found at [here](https://bbbootstrap.com/snippets/bootstrap-folder-list-checkbox-and-transform-effect-16091735).  
+Coffee svg found [here](https://freesvg.org/img/Coffee-Cup-Silhouette.png)
