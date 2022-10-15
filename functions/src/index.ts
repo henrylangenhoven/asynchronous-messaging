@@ -12,15 +12,14 @@ admin.initializeApp();
 
 
 app.post("/", jsonParser, async (req, res) => {
-  const body = req.body;
-  res.send("Timestamp: " + JSON.stringify(body.Timestamp));
+    const body = req.body;
 
+    const writeResult = await admin.firestore().collection("messages")
+        .add({body: body, timestamp: Date.now()});
 
-  const writeResult = await admin.firestore().collection("messages")
-      .add({body: body});
-
-  // Send back a message that we've successfully written the message
-  res.json({result: `Message with ID: ${writeResult.id} added.`});
+    // Send back a message that we've successfully written the message
+    res.json({result: `Message with ID: ${writeResult.id} added.`});
+    // res.send(`Message with ID: ${writeResult.id} added.`);
 });
 
 

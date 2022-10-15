@@ -1,6 +1,6 @@
 import {Component, OnDestroy} from '@angular/core';
-import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat/firestore";
-import {map, Observable, Subscription} from "rxjs";
+import {AngularFirestore} from "@angular/fire/compat/firestore";
+import {map, Observable} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -9,37 +9,22 @@ import {map, Observable, Subscription} from "rxjs";
 })
 export class AppComponent implements OnDestroy {
 
-  subscription = Subscription;
   title = 'asynchronous-messaging-ui';
 
-  tutorialsRef: AngularFirestoreCollection<any>;
+  messages: Observable<Message[]> = new Observable<Message[]>();
 
-  messages: Observable<any[]> = new Observable<any[]>();//=[
-  //   {
-  //     "Type": "SubscriptionConfirmation",
-  //     "MessageId": "165545c9-2a5c-472c-8df2-7ff2be2b3b1b",
-  //     "Token": "2336412f37f...",
-  //     "TopicArn": "arn:aws:sns:us-west-2:123456789012:MyTopic",
-  //     "Message": "You have chosen to subscribe to the topic arn:aws:sns:us-west-2:123456789012:MyTopic.\nTo confirm the subscription, visit the SubscribeURL included in this message.",
-  //     "SubscribeURL": "https://sns.us-west-2.amazonaws.com/?Action=ConfirmSubscription&TopicArn=arn:aws:sns:us-west-2:123456789012:MyTopic&Token=2336412f37...",
-  //     "Timestamp": "2012-04-26T20:45:04.751Z",
-  //     "SignatureVersion": "1",
-  //     "Signature": "EXAMPLEpH+...",
-  //     "SigningCertURL": "https://sns.us-west-2.amazonaws.com/SimpleNotificationService-f3ecfb7224c7233fe7bb5f59f96de52f.pem"
-  //   }
-  // ]
-
-
-  constructor(private fbs: AngularFirestore) {
-    this.tutorialsRef = fbs.collection("/messages")
+  constructor(private db: AngularFirestore) {
     this.getData();
   }
 
+  private readonly _path = "messages";
+
   getData() {
     // @ts-ignore
-    this.messages = this.fbs
-      .collection("messages")
-      .snapshotChanges().pipe(
+    this.messages = this.db
+      .collection(this._path)
+      .snapshotChanges()
+      .pipe(
         map(changes =>
           changes.map(c =>
             ({id: c.payload.doc.id, ...(c.payload.doc.data() as object)})
@@ -55,5 +40,15 @@ export class AppComponent implements OnDestroy {
   stringify(text: any) {
     return JSON.stringify(text);
   }
+
+  deleteMessage(id: string) {
+    this.db.doc(this._path + "/" + id).delete();
+  }
+
+}
+
+export interface Message {
+  id: string;
+  body: any;
 
 }
