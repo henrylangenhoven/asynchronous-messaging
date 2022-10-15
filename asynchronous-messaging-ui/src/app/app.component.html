@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col-12">
         <ul class="list-group mt-5 text-white">
-          <li *ngFor="let message of (messages| async)?.slice()?.reverse() "
+          <li *ngFor="let message of messages| async"
               class="list-group-item d-flex justify-content-between align-content-center">
             <div class="d-flex flex-row">
               <img src="https://freesvg.org/img/Coffee-Cup-Silhouette.png" width="80"/>
@@ -26,6 +26,16 @@
             </div>
           </li>
 
+          <li *ngIf="(messages|async)?.length==0"
+              class="list-group-item d-flex justify-content-between align-content-center">
+            <div class="d-flex flex-row">
+              <div class="ml-2">
+                <div class="about">
+                  <span>no messages...</span>
+                </div>
+              </div>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
