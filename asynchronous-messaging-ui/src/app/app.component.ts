@@ -22,7 +22,8 @@ export class AppComponent implements OnDestroy {
   getData() {
     // @ts-ignore
     this.messages = this.db
-      .collection(this._path)
+      .collection(this._path, ref =>
+        ref.orderBy('timestamp', 'desc'))
       .snapshotChanges()
       .pipe(
         map(changes =>
