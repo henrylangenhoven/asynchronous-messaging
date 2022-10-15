@@ -2,7 +2,7 @@ import * as fs from "fs";
 
 import * as path from "path";
 
-const dir = "asynchronous-messaging-ui/src/environments";
+const dir = "src/environments";
 const file = "environment.ts"
 const prodFile = "environment.prod.ts"
 

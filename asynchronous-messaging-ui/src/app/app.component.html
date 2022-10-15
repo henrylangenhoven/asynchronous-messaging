@@ -2,9 +2,10 @@
 
   <ul class="list-group mt-5 text-white">
 
-    <li *ngFor="let message of messages| async" class="list-group-item d-flex justify-content-between align-content-center">
+    <li *ngFor="let message of messages| async"
+        class="list-group-item d-flex justify-content-between align-content-center">
       <div class="d-flex flex-row">
-        <img src="https://freesvg.org/img/Coffee-Cup-Silhouette.png" width="80" />
+        <img src="https://freesvg.org/img/Coffee-Cup-Silhouette.png" width="80"/>
         <div class="ml-2">
           <h6 class="mb-0">{{message.body.Message}}</h6>
           <div class="about">
