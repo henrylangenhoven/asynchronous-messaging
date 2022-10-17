@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component} from '@angular/core';
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {map, Observable} from "rxjs";
 
@@ -7,7 +7,7 @@ import {map, Observable} from "rxjs";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnDestroy {
+export class AppComponent {
 
   title = 'asynchronous-messaging-ui';
 
@@ -23,7 +23,7 @@ export class AppComponent implements OnDestroy {
     // @ts-ignore
     this.messages = this.db
       .collection(this._path, ref =>
-        ref.orderBy('timestamp', 'desc'))
+        ref.orderBy('Timestamp', 'desc'))
       .snapshotChanges()
       .pipe(
         map(changes =>
@@ -34,10 +34,6 @@ export class AppComponent implements OnDestroy {
       );
   }
 
-  ngOnDestroy(): void {
-    // this.subscription.uns;
-  }
-
   stringify(text: any) {
     return JSON.stringify(text);
   }
@@ -45,10 +41,12 @@ export class AppComponent implements OnDestroy {
   deleteMessage(id: string) {
     this.db.doc(this._path + "/" + id).delete();
   }
-
 }
 
 export interface Message {
   id: string;
-  body: any;
+  Message: any;
+  Timestamp: any;
+  Subject: any;
+  SubscribeURL: any;
 }
